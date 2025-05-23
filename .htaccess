@@ -1,0 +1,9 @@
+RewriteEngine on
+ErrorDocument 404 http://localhost/blogphp-2025/404.php
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [NC,L]
+
+RewriteCond %{THE_REQUEST} /([^.]+)\.php [NC]
+RewriteRule ^ /%1 [NC,L,R]
+
+
