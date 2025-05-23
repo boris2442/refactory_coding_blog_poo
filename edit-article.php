@@ -3,7 +3,8 @@
 session_start();
 
 // 2Inclut le fichier de connexion à la base de données
-require_once 'database/database.php';
+require_once 'libraries/database.php';
+$pdo=getPdo();
 
 if (isset($_GET['id'])) {
 

@@ -1,6 +1,6 @@
 <?php
 require_once 'database/database.php';
-
+$pdo=getPdo();
 require 'vendor/autoload.php';
 
 use JasonGrimes\Paginator;
@@ -24,11 +24,11 @@ $query->bindParam(':offset', $offset, PDO::PARAM_INT);
 $query->execute();
 $articles = $query->fetchAll(PDO::FETCH_ASSOC);
 $paginator = new Paginator(
-    $totalItems,
-    $itemsPerPage,
-    $currentPage,
+  $totalItems,
+  $itemsPerPage,
+  $currentPage,
 
-    '?page=(:num)'
+  '?page=(:num)'
 
 );
 

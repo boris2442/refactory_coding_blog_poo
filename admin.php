@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once "database/database.php";
+require_once 'libraries/database.php';
+$pdo=getPdo();
 
 if ($_SESSION['role'] != 'admin') {
     header('Location: index.php');
