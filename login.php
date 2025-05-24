@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once 'libraries/database.php';
-$pdo=getPdo();
+$pdo = getPdo();
 
 
 if (isset($_POST['login'])) {
@@ -27,7 +27,7 @@ if (isset($_POST['login'])) {
         if ($user && password_verify($_POST['password'], $user['password'])) {
             $_SESSION['role'] = $user['role'];
             $_SESSION['auth'] = $user;
-  
+
 
             // Redirection en fonction du rôle
             switch ($user['role']) {
@@ -53,15 +53,16 @@ if (isset($_POST['login'])) {
 
 $pageTitle = "Se connecter dans le Blog";
 
-// 2-Debut du tampon de la page de sortie
+// // 2-Debut du tampon de la page de sortie
 
-ob_start();
+// ob_start();
 
-// 3-inclure le layout de la page login
-require_once 'layouts/articles/login_html.php';
+// // 3-inclure le layout de la page login
+// require_once 'layouts/articles/login_html.php';
 
-//4-recuperation du contenu du tampon de la page de login
-$pageContent = ob_get_clean();
+// //4-recuperation du contenu du tampon de la page de login
+// $pageContent = ob_get_clean();
 
-//5-Inclure le layout de la page de sortie
-require_once 'layouts/layout_html.php';
+// //5-Inclure le layout de la page de sortie
+// require_once 'layouts/layout_html.php';
+render('articles/login', compact('pageTitle', 'user'));
