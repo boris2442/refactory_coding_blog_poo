@@ -2,7 +2,7 @@
 session_start();
 require_once 'libraries/database.php';
 $pdo=getPdo();
-
+require_once 'libraries/utils.php';
 if ($_SESSION['role'] != 'admin') {
     header('Location: index.php');
     exit();
@@ -167,15 +167,16 @@ $paginator = new Paginator(
 
 $pageTitle = 'Page Admin';
 
-// 2-Debut du tampon de la page de sortie
+// // 2-Debut du tampon de la page de sortie
 
-ob_start();
+// ob_start();
 
-// 3-inclure le layout de la page d' accueil
-require_once 'layouts/admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd_html.php';
+// // 3-inclure le layout de la page d' accueil
+// require_once 'layouts/admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd_html.php';
 
-//4-recuperation du contenu du tampon de la page d'accueil
-$pageContent = ob_get_clean();
+// //4-recuperation du contenu du tampon de la page d'accueil
+// $pageContent = ob_get_clean();
 
-//5-Inclure le layout de la page de sortie
-require_once 'layouts/layout_html.php';
+// //5-Inclure le layout de la page de sortie
+// require_once 'layouts/layout_html.php';
+render('admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd', compact('pageTitle', 'articles'));

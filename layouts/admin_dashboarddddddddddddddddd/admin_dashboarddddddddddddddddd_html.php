@@ -59,5 +59,5 @@
             </div>
         <?php endforeach; ?>
     </div>
-    <?= $paginator?>
+    <?= $paginator ?>
 </section>
