@@ -11,3 +11,18 @@ function getPdo():PDO
     ]);
     return $pdo;
 }
+
+/**
+ * retourne la listes des articles classes par la date de creation
+ * @return array
+ */
+function getArticlesPaginated(PDO $pdo, int $limit, int $offset): array
+{
+    $sql = "SELECT * FROM articles ORDER BY created_at DESC LIMIT :limit OFFSET :offset";
+    $query = $pdo->prepare($sql);
+    $query->bindParam(':limit', $limit, PDO::PARAM_INT);
+    $query->bindParam(':offset', $offset, PDO::PARAM_INT);
+    $query->execute();
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'libraries/database.php';
+require_once 'libraries/utils.php';
 $pdo = getPdo();
 
 
@@ -65,4 +66,4 @@ $pageTitle = "Se connecter dans le Blog";
 
 // //5-Inclure le layout de la page de sortie
 // require_once 'layouts/layout_html.php';
-render('articles/login', compact('pageTitle', 'user'));
+render('articles/login', compact('pageTitle'));

@@ -14,16 +14,20 @@ $totalItems = $totalQuery->fetchColumn(); //recupere le nombre Total  d articles
 $offset = ($currentPage - 1) * $itemsPerPage;
 
 
-//recuperation des articles dans la datyabase...
-$sql = "SELECT * FROM articles ORDER BY created_at
- DESC
- LIMIT :limit OFFSET :offset
-  ";
-$query = $pdo->prepare($sql);
-$query->bindParam(':limit', $itemsPerPage, PDO::PARAM_INT);
-$query->bindParam(':offset', $offset, PDO::PARAM_INT);
-$query->execute();
-$articles = $query->fetchAll(PDO::FETCH_ASSOC);
+//recuperation des articles dans la database...
+// $sql = "SELECT * FROM articles ORDER BY created_at
+//  DESC
+//  LIMIT :limit OFFSET :offset
+//   ";
+// $query = $pdo->prepare($sql);
+// $query->bindParam(':limit', $itemsPerPage, PDO::PARAM_INT);
+// $query->bindParam(':offset', $offset, PDO::PARAM_INT);
+// $query->execute();
+// $articles = $query->fetchAll(PDO::FETCH_ASSOC);
+
+//recuperation des articles dans la database...
+$articles = getArticlesPaginated($pdo, $itemsPerPage, $offset);
+
 $paginator = new Paginator(
   $totalItems,
   $itemsPerPage,
