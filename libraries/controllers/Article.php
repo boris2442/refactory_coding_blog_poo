@@ -2,8 +2,8 @@
 
 namespace Controllers;
 
-require_once 'libraries/utils.php';
-require_once 'libraries/database.php';
+require_once 'libraries/Database.php';
+// require_once 'libraries/utils.php';
 // require_once 'libraries/models/Article.php';
 // require_once 'libraries/controllers/Controller.php';
 require 'vendor/autoload.php'; // Assurez-vous que le chemin est correct
@@ -18,8 +18,8 @@ class Article extends Controller
     public function index()
     {
 
-        $pdo = getPdo();
-
+        // $pdo = getPdo();
+$pdo = \Database::getPdo();
         $itemsPerPage = 5; //nbre article par page
         $currentPage = $_GET['page'] ?? 1; //page actuelle
 
@@ -40,14 +40,16 @@ class Article extends Controller
 
         );
         $pageTitle = 'Accueil du Blog';
-        render('articles/index', compact('pageTitle', 'articles', 'paginator'));
+        // render('articles/index', compact('pageTitle', 'articles', 'paginator'));
+        \Renderer::render('articles/index', compact('pageTitle', 'articles', 'paginator'));
     }
 
 
     public function show()
     {
 
-        $pdo = getPdo();
+        // $pdo = getPdo();
+        $pdo = \Database::getPdo();
         // require_once 'libraries/utils.php';
         // require_once 'libraries/models/Article.php';
         $errors = [];
@@ -69,11 +71,11 @@ class Article extends Controller
 
         $pageTitle = 'Articles du Blog';
 
-        render('articles/show', compact('pageTitle', 'commentaires', 'article', 'article_id'));
+        \Renderer::render('articles/show', compact('pageTitle', 'commentaires', 'article', 'article_id'));
     }
     public function delete()
     {
-        $pdo = getPdo();
+        // $pdo = getPdo();
 
         $pageTitle = "supprimer un article";
 
@@ -87,7 +89,7 @@ class Article extends Controller
 
             // $model = new \Models\Article();
            $this-> model->deleteArticle($id);
-            redirect('admin.php');
+            \Http::redirect('admin.php');
         
         }
     }

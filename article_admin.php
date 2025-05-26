@@ -2,7 +2,8 @@
 session_start();
 require_once 'libraries/database.php';
 require_once 'libraries/utils.php';
-require_once 'libraries/model/Article.php';
+// require_once 'libraries/model/Article.php';
+require_once 'libraries/autoload.php';
 $pdo = getPdo();
 $errors = [];
 $article_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
@@ -16,6 +17,6 @@ $article = $model->findArticle($article_id);
 
 //recuperation des articles dans la datyabase...
 $model = new \Models\Article();
-$articles = findAllArticles();
+$articles = findAll();
 $pageTitle = 'Articles du Blog';
 render('admin_dashboarddddddddddddddddd/admin_show', compact('pageTitle', 'articles', 'article'));

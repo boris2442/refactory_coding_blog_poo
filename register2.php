@@ -5,7 +5,7 @@ require_once 'libraries/utils.php';
 $pdo=getPdo();
 
 if (isset($_POST['register'])) {
-    // echo "ok";
+  
     $errors = [];
 
     // Pseudo--------------------------------
@@ -27,7 +27,7 @@ if (isset($_POST['register'])) {
     if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = "Email non valide";
     } else {
-        // SELECT * FROM users WHERE email = post
+      
         $query = "SELECT * FROM users WHERE email = ?";
         $req = $pdo->prepare($query);
         $req->execute([$_POST['email']]);

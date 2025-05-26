@@ -2,8 +2,9 @@
 session_start();
 require_once 'libraries/database.php';
 require_once 'libraries/utils.php';
+require_once 'libraries/autoload.php';
 $pdo = getPdo();
-require_once 'libraries/models/Article.php';
+// require_once 'libraries/models/Article.php';
 if ($_SESSION['role'] != 'admin') {
     redirect('index.php');
 }
