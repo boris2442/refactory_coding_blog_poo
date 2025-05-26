@@ -32,6 +32,5 @@ class Comment extends Model
             $article_id,
             $user_auth
         ]);
-       
     }
 }

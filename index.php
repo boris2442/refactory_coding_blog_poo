@@ -2,11 +2,16 @@
 require_once 'libraries/database.php';
 require_once 'libraries/utils.php';
 require_once 'libraries/models/Article.php';
+// require_once 'libraries/models/User.php';
 $pdo=getPdo();
 require 'vendor/autoload.php';
 
 use JasonGrimes\Paginator;
 
+// $userModel=new User();
+// $user=$userModel->findAllArticles();
+// var_dump($user);
+// die();
 $itemsPerPage = 5; //nbre article par page
 $currentPage = $_GET['page'] ?? 1; //page actuelle
 
