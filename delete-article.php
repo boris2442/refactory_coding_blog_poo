@@ -2,6 +2,7 @@
 session_start();
 require_once 'libraries/database.php';
 require_once 'libraries/utils.php';
+require_once "libraries/models/Article.php";
 $pdo=getPdo();
 
 
@@ -19,6 +20,7 @@ if(isset($_GET)){
     // $query=$pdo->prepare($sql);
     // $query->bindParam('id', $id);
     // $query->execute();
-    deleteArticle($id);
-   redirect('admin.php');
+    $model=new Article();
+    $model->deleteArticle($id);
+  header('location:admin.php');
 }

@@ -3,7 +3,7 @@ session_start();
 require_once 'libraries/database.php';
 require_once 'libraries/utils.php';
 $pdo=getPdo();
-require_once 'libraries/utils.php';
+require_once 'libraries/models/Article.php';
 if ($_SESSION['role'] != 'admin') {
     redirect('index.php');
 }
@@ -108,7 +108,8 @@ if (isset($_POST['add-article'])) {
         $error = "Veuillez remplir tous les champs du formulaire !";
     }
     // --Insertion du nouvel article dans la base de données
-    insertArticle($title, $slug, $introduction, $content);
+    $model=new Article();
+    $model->insertArticle($title, $slug, $introduction, $content);
 }
 require 'vendor/autoload.php';
 use JasonGrimes\Paginator;
@@ -121,22 +122,12 @@ $offset = ($currentPage - 1) * $itemsPerPage;
 
 
 //recuperation des articles dans la datyabase...
-// $sql = "SELECT * FROM articles ORDER BY created_at
-//  DESC
-//  LIMIT :limit OFFSET :offset
-//   ";
-// $query = $pdo->prepare($sql);
-// $query->bindParam(':limit', $itemsPerPage, PDO::PARAM_INT);
-// $query->bindParam(':offset', $offset, PDO::PARAM_INT);
-// $query->execute();
-// $articles = $query->fetchAll(PDO::FETCH_ASSOC);
 $articles = getArticlesPaginated($pdo, $itemsPerPage, $offset);
 $paginator = new Paginator(
     $totalItems,
     $itemsPerPage,
     $currentPage,
-
-    '?page=(:num)'
+'?page=(:num)'
 
 );
 

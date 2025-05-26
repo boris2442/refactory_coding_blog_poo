@@ -1,5 +1,5 @@
 <?php
-require_once '../database.php';
+require_once "libraries/database.php";
 class Article
 {
     public function findAllArticles()
@@ -11,7 +11,8 @@ class Article
         $articles = $query->fetchAll(PDO::FETCH_ASSOC);
         return $articles;
     }
-    public //recuperation d'un seul article
+    //recuperation d'un seul article
+    public
     function findArticle(int $article_id): array
     {
         $pdo = getPdo();
@@ -31,12 +32,33 @@ class Article
         $query->execute();
     }
 
-    function articleSelect($article_id)
+    public function articleSelect($article_id)
+    {
+        $pdo = getPdo();
+        $query = $pdo->prepare('SELECT COUNT(*) FROM articles WHERE id=:article_id ');
+        $query->execute(['article_id' => $article_id]);
+        $articleExists = $query->fetchColumn();
+        return $articleExists;
+    }
+
+    public function insertArticle($title, $slug, $introduction, $content)
+    {
+        $pdo = getPdo();
+        $query = $pdo->prepare('INSERT INTO articles (title, slug, introduction, content, created_at) VALUES (:title, :slug, :introduction, :content, NOW())');
+        $query->execute(compact('title', 'slug', 'introduction', 'content'));
+    }
+    /**
+ * retourne la listes des articles classes par la date de creation
+ * @return array
+ */
+function getArticlesPaginated(PDO $pdo, int $limit, int $offset): array
 {
-    $pdo = getPdo();
-    $query = $pdo->prepare('SELECT COUNT(*) FROM articles WHERE id=:article_id ');
-    $query->execute(['article_id' => $article_id]);
-    $articleExists = $query->fetchColumn();
-    return $articleExists;
+    $sql = "SELECT * FROM articles ORDER BY created_at DESC LIMIT :limit OFFSET :offset";
+    $query = $pdo->prepare($sql);
+    $query->bindParam(':limit', $limit, PDO::PARAM_INT);
+    $query->bindParam(':offset', $offset, PDO::PARAM_INT);
+    $query->execute();
+    return $query->fetchAll(PDO::FETCH_ASSOC);
 }
+
 }

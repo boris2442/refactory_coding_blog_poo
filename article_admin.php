@@ -2,6 +2,7 @@
 session_start();
 require_once 'libraries/database.php';
 require_once 'libraries/utils.php';
+require_once 'libraries/models/Article.php';
 $pdo=getPdo();
 $errors=[];
 $article_id=filter_input(INPUT_GET,'id',FILTER_VALIDATE_INT);
@@ -13,7 +14,8 @@ $errors['article_id']='Parametre id non valide';
 // $query=$pdo->prepare($sql);
 // $query->execute(compact('article_id'));
 // $article=$query->fetch();
-$article=findArticle( $article_id);
+$model=new Article();
+$article=$model->findArticle( $article_id);
 
 
 //recuperation des articles dans la datyabase...
@@ -21,7 +23,8 @@ $article=findArticle( $article_id);
 // $query = $pdo->prepare($sql);
 // $query->execute();
 // $articles = $query->fetchAll(PDO::FETCH_ASSOC);
-$articles=findAllArticles();
+$model=new Article();
+$articles=$model->findAllArticles();
 
 
 

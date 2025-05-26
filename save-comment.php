@@ -2,6 +2,7 @@
 session_start();
 require_once 'libraries/database.php';
 require_once 'libraries/utils.php';
+require_once 'libraries/models/Article.php';
 
 $pdo = getPdo();
 
@@ -21,7 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // $query = $pdo->prepare('SELECT COUNT(*) FROM articles WHERE id=:article_id ');
   // $query->execute(['article_id' => $article_id]);
   // $articleExists = $query->fetchColumn();
-  $articleExists = articleSelect($article_id);
+  $model=new Article();
+  $articleExists =$model->articleSelect($article_id);
   //insertion du commentaire
 
   // $query = $pdo->prepare("INSERT INTO `comments` (content, article_id, user_id, created_at)  VALUES (?,?,?, NOW())");
@@ -32,7 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   //   $article_id,
   //   $user_auth
   // ]);
-  insertComment(
+  $model=new Comment();
+    $model->insertComment(
     $content,
     $article_id,
     $user_auth
