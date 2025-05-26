@@ -2,7 +2,7 @@
 session_start();
 require_once 'libraries/database.php';
 require_once 'libraries/utils.php';
-$pdo=getPdo();
+$pdo = getPdo();
 require_once 'libraries/models/Article.php';
 if ($_SESSION['role'] != 'admin') {
     redirect('index.php');
@@ -108,11 +108,13 @@ if (isset($_POST['add-article'])) {
         $error = "Veuillez remplir tous les champs du formulaire !";
     }
     // --Insertion du nouvel article dans la base de données
-    $model=new Article();
+    $model = new Article();
     $model->insertArticle($title, $slug, $introduction, $content);
 }
 require 'vendor/autoload.php';
+
 use JasonGrimes\Paginator;
+
 $itemsPerPage = 5; //nbre article par page
 $currentPage = $_GET['page'] ?? 1; //page actuelle
 
@@ -127,7 +129,7 @@ $paginator = new Paginator(
     $totalItems,
     $itemsPerPage,
     $currentPage,
-'?page=(:num)'
+    '?page=(:num)'
 
 );
 

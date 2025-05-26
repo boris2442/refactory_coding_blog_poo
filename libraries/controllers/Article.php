@@ -4,26 +4,17 @@ namespace Controllers;
 
 require_once 'libraries/utils.php';
 require_once 'libraries/database.php';
-require_once 'libraries/models/Article.php';
+// require_once 'libraries/models/Article.php';
+// require_once 'libraries/controllers/Controller.php';
 require 'vendor/autoload.php'; // Assurez-vous que le chemin est correct
 use JasonGrimes\Paginator;
 
+// require_once 'libraries/models/Comment.php';
 
-
-
-
-require_once 'libraries/models/Comment.php';
-
-// require_once 'libraries/database.php';
-// require_once 'libraries/utils.php';
-// require_once 'libraries/models/Article.php';
-
-
-
-
-class Article
+class Article extends Controller
 {
-
+//   protected $modelName = "\Models\Article";
+  protected $modelName = \Models\Article::class;
     public function index()
     {
 
@@ -53,14 +44,9 @@ class Article
     }
 
 
-
-
     public function show()
     {
 
-        // require_once 'libraries/models/Comment.php';
-        // $commentModel = new \Models\Comment();
-        // require_once 'libraries/database.php';
         $pdo = getPdo();
         // require_once 'libraries/utils.php';
         // require_once 'libraries/models/Article.php';
@@ -69,8 +55,8 @@ class Article
         if (!$article_id || $article_id === NULL) {
             $errors['article_id'] = 'Parametre id non valide';
         }
-        $model = new \Models\Article();
-        $article = $model->findArticle($article_id);
+        // $model = new \Models\Article();
+        $article =$this->model->findArticle($article_id);
         $commentModel = new \Models\Comment();
         $commentaires = $commentModel->findAllComments($article_id);
 
@@ -87,10 +73,6 @@ class Article
     }
     public function delete()
     {
-
-        // require_once 'libraries/database.php';
-        // require_once 'libraries/utils.php';
-        // require_once "libraries/models/Article.php";
         $pdo = getPdo();
 
         $pageTitle = "supprimer un article";
@@ -103,10 +85,10 @@ class Article
             var_dump($id);
             echo "</pre>";
 
-            $model = new \Models\Article();
-            $model->deleteArticle($id);
-         redirect('admin.php');
-            // header('location:admin.php');
+            // $model = new \Models\Article();
+           $this-> model->deleteArticle($id);
+            redirect('admin.php');
+        
         }
     }
     public function create()
