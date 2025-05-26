@@ -1,6 +1,9 @@
 <?php
+
 namespace Models;
+
 use PDO;
+
 require_once "libraries/database.php";
 //ce fichier doit contenir les classes que tous les models vont avoit...
 abstract class Model

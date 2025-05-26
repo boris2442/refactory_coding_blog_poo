@@ -14,7 +14,7 @@ $errors['article_id']='Parametre id non valide';
 // $query=$pdo->prepare($sql);
 // $query->execute(compact('article_id'));
 // $article=$query->fetch();
-$model=new Article();
+$model=new \Models\Article();
 $article=$model->findArticle( $article_id);
 
 
@@ -23,7 +23,7 @@ $article=$model->findArticle( $article_id);
 // $query = $pdo->prepare($sql);
 // $query->execute();
 // $articles = $query->fetchAll(PDO::FETCH_ASSOC);
-$model=new Article();
+$model=new \Models\Article();
 $articles=findAllArticles();
 
 

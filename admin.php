@@ -8,7 +8,7 @@ if ($_SESSION['role'] != 'admin') {
     redirect('index.php');
 }
 //-Nettoyage des entrées
-
+$model = new \Models\Article(); 
 function clean_input($data)
 {
     return htmlspecialchars(stripslashes(trim($data)));
@@ -108,7 +108,7 @@ if (isset($_POST['add-article'])) {
         $error = "Veuillez remplir tous les champs du formulaire !";
     }
     // --Insertion du nouvel article dans la base de données
-    $model = new Article();
+    $model = new \Models\Article();
     $model->insertArticle($title, $slug, $introduction, $content);
 }
 require 'vendor/autoload.php';
@@ -124,7 +124,7 @@ $offset = ($currentPage - 1) * $itemsPerPage;
 
 
 //recuperation des articles dans la datyabase...
-$articles = getArticlesPaginated($pdo, $itemsPerPage, $offset);
+$articles =$model-> getArticlesPaginated($pdo, $itemsPerPage, $offset);
 $paginator = new Paginator(
     $totalItems,
     $itemsPerPage,
