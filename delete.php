@@ -4,6 +4,7 @@ session_start();
 
 // 2Inclut le fichier de connexion à la base de données
 require_once 'libraries/database.php';
+require_once 'libraries/utils.php';
 $pdo=getPdo();
 
 // 3-Définit le titre de la page
@@ -20,5 +21,6 @@ if(isset($_GET)){
     $query=$pdo->prepare($sql);
     $query->bindParam('id', $id);
     $query->execute();
-    header('location:index');
+    
+    redirect('index');
 }

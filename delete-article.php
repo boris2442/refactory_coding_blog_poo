@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'libraries/database.php';
+require_once 'libraries/utils.php';
 $pdo=getPdo();
 
 
@@ -19,5 +20,5 @@ if(isset($_GET)){
     // $query->bindParam('id', $id);
     // $query->execute();
     deleteArticle($id);
-    header('location:admin');
+   redirect('admin.php');
 }

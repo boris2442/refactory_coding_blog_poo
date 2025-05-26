@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'libraries/database.php';
+require_once 'libraries/utils.php';
 
 $pdo = getPdo();
 
@@ -37,7 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_auth
   );
   //redirection dans la page des articles du commentaire
-  header('location:index.php');
+  // header('location:index.php');
+  // exit();
+  redirect("index.php");
 }
 /**
  * CE FICHIER DOIT ENREGISTRER UN NOUVEAU COMMENTAIRE EST REDIRIGER SUR L'ARTICLE !

@@ -40,8 +40,7 @@ if (isset($_GET['id'])) {
             $requete->bindValue(':content', $_POST['content']);
             $requete->bindValue(':id', $id);
             $requete->execute();
-            header('Location: admin.php');
-            exit();
+            redirect('admin.php');
         } else {
             echo "<pre>";
             var_dump($errors);

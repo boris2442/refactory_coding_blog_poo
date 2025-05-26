@@ -27,16 +27,7 @@ function getArticlesPaginated(PDO $pdo, int $limit, int $offset): array
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
-//recuperation d'un seul article
-function findArticle(int $article_id): array
-{
-    $pdo = getPdo();
-    $sql = "SELECT*FROM ARTICLES WHERE id=:article_id";
-    $query = $pdo->prepare($sql);
-    $query->execute(compact('article_id'));
-    $article = $query->fetch();
-    return $article;
-}
+
 
 
 
@@ -54,36 +45,6 @@ function findAllComments(int $article_id): array
     return $commentaires;
 }
 
-function findAllArticles()
-{
-    $pdo = getPdo();
-    $sql = "SELECT * FROM articles ORDER BY created_at DESC ";
-    $query = $pdo->prepare($sql);
-    $query->execute();
-    $articles = $query->fetchAll(PDO::FETCH_ASSOC);
-    return $articles;
-}
-
-
-//function de suppression d'un articles
-
-function deleteArticle($id)
-{
-    $pdo = getPdo();
-    $sql = "DELETE FROM  `articles` WHERE id=:id";
-    $query = $pdo->prepare($sql);
-    $query->bindParam('id', $id);
-    $query->execute();
-}
-
-function articleSelect($article_id)
-{
-    $pdo = getPdo();
-    $query = $pdo->prepare('SELECT COUNT(*) FROM articles WHERE id=:article_id ');
-    $query->execute(['article_id' => $article_id]);
-    $articleExists = $query->fetchColumn();
-    return $articleExists;
-}
 
 function insertComment(
     string $content,
@@ -101,4 +62,9 @@ function insertComment(
     ]);
     //redirection dans la page des articles du commentaire
     // header('location:index.php');
+}
+function insertArticle($title, $slug, $introduction, $content){
+    $pdo=getPdo();
+    $query = $pdo->prepare('INSERT INTO articles (title, slug, introduction, content, created_at) VALUES (:title, :slug, :introduction, :content, NOW())');
+    $query->execute(compact('title', 'slug', 'introduction', 'content'));
 }

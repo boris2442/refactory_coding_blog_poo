@@ -1,11 +1,11 @@
 <?php
 session_start();
 require_once 'libraries/database.php';
+require_once 'libraries/utils.php';
 $pdo=getPdo();
 require_once 'libraries/utils.php';
 if ($_SESSION['role'] != 'admin') {
-    header('Location: index.php');
-    exit();
+    redirect('index.php');
 }
 //-Nettoyage des entrées
 
@@ -108,22 +108,10 @@ if (isset($_POST['add-article'])) {
         $error = "Veuillez remplir tous les champs du formulaire !";
     }
     // --Insertion du nouvel article dans la base de données
-    $query = $pdo->prepare('INSERT INTO articles (title, slug, introduction, content, created_at) VALUES (:title, :slug, :introduction, :content, NOW())');
-    $query->execute(compact('title', 'slug', 'introduction', 'content'));
+    insertArticle($title, $slug, $introduction, $content);
 }
-
-// -Recuperation de tous les articles
-
-// $query = "SELECT * FROM articles ORDER BY created_at DESC ";
-// $resultats = $pdo->prepare($query);
-// $resultats->execute();
-// $articles = $resultats->fetchAll();
-
-
 require 'vendor/autoload.php';
-
 use JasonGrimes\Paginator;
-
 $itemsPerPage = 5; //nbre article par page
 $currentPage = $_GET['page'] ?? 1; //page actuelle
 

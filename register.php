@@ -2,6 +2,7 @@
 session_start();
 
 require_once 'libraries/database.php';
+require_once 'libraries/utils.php';
 $pdo=getPdo();
 
 
@@ -55,8 +56,7 @@ if (isset($_POST['register'])) {
 
     // On redirige vers la page de login
 
-    header("Location: login");
-    exit();
+    redirect('login.php');
   }
 }
 
