@@ -63,3 +63,42 @@ function findAllArticles()
     $articles = $query->fetchAll(PDO::FETCH_ASSOC);
     return $articles;
 }
+
+
+//function de suppression d'un articles
+
+function deleteArticle($id)
+{
+    $pdo = getPdo();
+    $sql = "DELETE FROM  `articles` WHERE id=:id";
+    $query = $pdo->prepare($sql);
+    $query->bindParam('id', $id);
+    $query->execute();
+}
+
+function articleSelect($article_id)
+{
+    $pdo = getPdo();
+    $query = $pdo->prepare('SELECT COUNT(*) FROM articles WHERE id=:article_id ');
+    $query->execute(['article_id' => $article_id]);
+    $articleExists = $query->fetchColumn();
+    return $articleExists;
+}
+
+function insertComment(
+    string $content,
+    int $article_id,
+    int $user_auth
+): void {
+    $pdo = getPdo();
+    $query = $pdo->prepare("INSERT INTO `comments` (content, article_id, user_id, created_at)  VALUES (?,?,?, NOW())");
+
+    //   var_dump($article_id, $user_auth, $content);
+    $query->execute([
+        $content,
+        $article_id,
+        $user_auth
+    ]);
+    //redirection dans la page des articles du commentaire
+    // header('location:index.php');
+}

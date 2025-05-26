@@ -152,20 +152,6 @@ $paginator = new Paginator(
 
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 $pageTitle = 'Page Admin';
 
 // // 2-Debut du tampon de la page de sortie

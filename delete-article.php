@@ -14,9 +14,10 @@ if(isset($_GET)){
     echo "<pre>";
     var_dump($id);
     echo "</pre>";
-    $sql="DELETE FROM  `articles` WHERE id=:id";
-    $query=$pdo->prepare($sql);
-    $query->bindParam('id', $id);
-    $query->execute();
+    // $sql="DELETE FROM  `articles` WHERE id=:id";
+    // $query=$pdo->prepare($sql);
+    // $query->bindParam('id', $id);
+    // $query->execute();
+    deleteArticle($id);
     header('location:admin');
 }

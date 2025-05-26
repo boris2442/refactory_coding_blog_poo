@@ -2,7 +2,7 @@
 session_start();
 require_once 'libraries/database.php';
 
-$pdo=getPdo();
+$pdo = getPdo();
 
 if (!isset($_SESSION['auth']['id'])) {
   header('location: login.php');
@@ -17,33 +17,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // $article_id = $_POST['article_id'] ?? null;
   $article_id = intval($_POST['article_id'] ?? null);
-  $query = $pdo->prepare('SELECT COUNT(*) FROM articles WHERE id=:article_id ');
-  $query->execute(['article_id' => $article_id]);
-  $articleExists = $query->fetchColumn();
+  // $query = $pdo->prepare('SELECT COUNT(*) FROM articles WHERE id=:article_id ');
+  // $query->execute(['article_id' => $article_id]);
+  // $articleExists = $query->fetchColumn();
+  $articleExists = articleSelect($article_id);
   //insertion du commentaire
 
-  $query = $pdo->prepare("INSERT INTO `comments` (content, article_id, user_id, created_at)  VALUES (?,?,?, NOW())");
-  
-  var_dump($article_id,$user_auth, $content);
-  $query->execute([
+  // $query = $pdo->prepare("INSERT INTO `comments` (content, article_id, user_id, created_at)  VALUES (?,?,?, NOW())");
+
+  // var_dump($article_id, $user_auth, $content);
+  // $query->execute([
+  //   $content,
+  //   $article_id,
+  //   $user_auth
+  // ]);
+  insertComment(
     $content,
     $article_id,
     $user_auth
-   ]);
-  
-
-
+  );
   //redirection dans la page des articles du commentaire
-header('location:index.php');
-
+  header('location:index.php');
 }
-
-
-
-
-
-
-
 /**
  * CE FICHIER DOIT ENREGISTRER UN NOUVEAU COMMENTAIRE EST REDIRIGER SUR L'ARTICLE !
  * 
