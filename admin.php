@@ -133,15 +133,16 @@ $offset = ($currentPage - 1) * $itemsPerPage;
 
 
 //recuperation des articles dans la datyabase...
-$sql = "SELECT * FROM articles ORDER BY created_at
- DESC
- LIMIT :limit OFFSET :offset
-  ";
-$query = $pdo->prepare($sql);
-$query->bindParam(':limit', $itemsPerPage, PDO::PARAM_INT);
-$query->bindParam(':offset', $offset, PDO::PARAM_INT);
-$query->execute();
-$articles = $query->fetchAll(PDO::FETCH_ASSOC);
+// $sql = "SELECT * FROM articles ORDER BY created_at
+//  DESC
+//  LIMIT :limit OFFSET :offset
+//   ";
+// $query = $pdo->prepare($sql);
+// $query->bindParam(':limit', $itemsPerPage, PDO::PARAM_INT);
+// $query->bindParam(':offset', $offset, PDO::PARAM_INT);
+// $query->execute();
+// $articles = $query->fetchAll(PDO::FETCH_ASSOC);
+$articles = getArticlesPaginated($pdo, $itemsPerPage, $offset);
 $paginator = new Paginator(
     $totalItems,
     $itemsPerPage,
@@ -179,4 +180,4 @@ $pageTitle = 'Page Admin';
 
 // //5-Inclure le layout de la page de sortie
 // require_once 'layouts/layout_html.php';
-render('admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd', compact('pageTitle', 'articles'));
+render('admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd', compact('pageTitle', 'articles', 'paginator'));

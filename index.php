@@ -55,4 +55,4 @@ $pageTitle = 'Accueil du Blog';
 
 // //5-Inclure le layout de la page de sortie
 // require_once 'layouts/layout_html.php';
-render('articles/index', compact('pageTitle', 'articles'));
+render('articles/index', compact('pageTitle', 'articles', 'paginator'));
