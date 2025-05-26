@@ -2,17 +2,18 @@
 require_once "libraries/models/Model.php";
 class Article extends Model{
 
+    protected $table="articles";
 //un comportement qui s'appelle des que on creent une function s'appellent le contructeur...
 //ici on utilise le contructeur car $pdo est appeler dans toites nos functions...
-    public function findAllArticles()
-    {
-        // $pdo = getPdo();
-        $sql = "SELECT * FROM articles ORDER BY created_at DESC ";
-        $query = $this->pdo->prepare($sql);
-        $query->execute();
-        $articles = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $articles;
-    }
+    // public function findAllArticles()
+    // {
+    //     // $pdo = getPdo();
+    //     $sql = "SELECT * FROM articles ORDER BY created_at DESC ";
+    //     $query = $this->pdo->prepare($sql);
+    //     $query->execute();
+    //     $articles = $query->fetchAll(PDO::FETCH_ASSOC);
+    //     return $articles;
+    // }
     //recuperation d'un seul article
 
         public function findArticle(int $article_id): array
