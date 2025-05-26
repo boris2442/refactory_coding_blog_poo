@@ -2,7 +2,7 @@
 namespace Controllers;   
 require_once 'libraries/models/Comment.php';
 require_once 'libraries/database.php';
-require_once 'libraries/utils.php';
+
 require_once 'libraries/models/Article.php';
 require_once 'libraries/controllers/Controller.php';
 
@@ -19,8 +19,8 @@ class Comment extends Controller
         // namespace Comments; 
 
         require_once 'libraries/models/Comment.php';
-        $pdo = getPdo();
-
+        // $pdo = getPdo();
+$pdo = \Database::getPdo();
         if (!isset($_SESSION['auth']['id'])) {
             header('location: login.php');
             exit();
@@ -55,7 +55,7 @@ class Comment extends Controller
                 $user_auth
             );
 
-            redirect("index.php");
+            \Http::redirect("index.php");
         }
     }
     public  function insert()

@@ -3,10 +3,10 @@ session_start();
 require_once 'libraries/database.php';
 require_once 'libraries/utils.php';
 require_once 'libraries/autoload.php';
-$pdo = getPdo();
+$pdo = \Database::getPdo();
 // require_once 'libraries/models/Article.php';
 if ($_SESSION['role'] != 'admin') {
-    redirect('index.php');
+    \Http::redirect('index.php');
 }
 //-Nettoyage des entrées
 $model = new \Models\Article(); 
@@ -148,4 +148,4 @@ $pageTitle = 'Page Admin';
 
 // //5-Inclure le layout de la page de sortie
 // require_once 'layouts/layout_html.php';
-render('admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd', compact('pageTitle', 'articles', 'paginator'));
+\Renderer::render('admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd', compact('pageTitle', 'articles', 'paginator'));

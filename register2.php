@@ -1,9 +1,9 @@
 <?php
 session_start();
 require_once 'libraries/database.php';
-require_once 'libraries/utils.php';
-$pdo=getPdo();
-
+// require_once 'libraries/utils.php';
+// $pdo=getPdo();
+$pdo = \Database::getPdo();
 if (isset($_POST['register'])) {
   
     $errors = [];
@@ -56,7 +56,7 @@ if (isset($_POST['register'])) {
 
         // header("Location: login");
         // exit();
-        redirect('login');
+        \Http::redirect('login');
     }
 }
 
@@ -80,4 +80,4 @@ $pageTitle = "S'inscrire dans le Blog";
 
 // //5-Inclure le layout de la page de sortie
 // require_once 'layouts/layout_html.php';
-render('articles/register', compact('pageTitle'));
+\Renderer::render('articles/register', compact('pageTitle'));

@@ -4,8 +4,8 @@ session_start();
 
 // 2Inclut le fichier de connexion à la base de données
 require_once 'libraries/database.php';
-require_once 'libraries/utils.php';
-$pdo=getPdo();
+// require_once 'libraries/utils.php';
+$pdo = \Database::getPdo();
 
 if (isset($_GET['id'])) {
 
@@ -40,7 +40,7 @@ if (isset($_GET['id'])) {
             $requete->bindValue(':content', $_POST['content']);
             $requete->bindValue(':id', $id);
             $requete->execute();
-            redirect('admin.php');
+            \Http::redirect('admin.php');
         } else {
             echo "<pre>";
             var_dump($errors);
@@ -51,4 +51,4 @@ if (isset($_GET['id'])) {
 
 $pageTitle = "Éditer un article";
 
-render('admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd_edit',compact('pageTitle', 'article') );
+\Renderer::render('admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd_edit',compact('pageTitle', 'article') );

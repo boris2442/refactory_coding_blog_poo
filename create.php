@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once 'libraries/database.php';
-$pdo=getPdo();
+$pdo = \Database::getPdo();
 
 //insertion de l'article dans la base de donnee
 if (!empty($_POST)) {
