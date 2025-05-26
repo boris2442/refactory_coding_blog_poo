@@ -49,18 +49,6 @@ if (isset($_GET['id'])) {
     }
 }
 
-//Définit le titre de la page
 $pageTitle = "Éditer un article";
 
-// // 4-Démarre la mise en tampon de sortie pour capturer le contenu HTML
-// ob_start();
-
-// // 5Inclut le fichier HTML pour éditer un article
-// require 'layouts/admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd_edit_html.php';
-
-// // 6Récupère le contenu mis en tampon et le stocke dans la variable $pageContent
-// $pageContent = ob_get_clean();
-
-// // 7Inclut le modèle de mise en page HTML qui affichera le contenu de la page
-// require 'layouts/layout_html.php';
 render('admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd_edit',compact('pageTitle', 'article') );

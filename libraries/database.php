@@ -12,12 +12,3 @@ function getPdo(): PDO
     ]);
     return $pdo;
 }
-
-
-
-
-
-
-
-
-
