@@ -1,4 +1,6 @@
 <?php
+namespace Models;
+use PDO;
 require_once "libraries/database.php";
 //ce fichier doit contenir les classes que tous les models vont avoit...
 abstract class Model
@@ -8,7 +10,7 @@ abstract class Model
     protected $pdo;
     protected $table;
 
-    public function __contruct() // il s'agit d une fonction constructeur... des que on appelle une fonction, elle reagit directement
+    public function __construct() // il s'agit d une fonction constructeur... des que on appelle une fonction, elle reagit directement
     {
         $this->pdo = getPdo();
     }

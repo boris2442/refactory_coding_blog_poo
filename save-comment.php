@@ -1,9 +1,11 @@
 <?php
+namespace Controllers;            
+namespace Comments;            
 session_start();
 require_once 'libraries/database.php';
 require_once 'libraries/utils.php';
 require_once 'libraries/models/Article.php';
-
+require_once 'libraries/models/Comment.php';
 $pdo = getPdo();
 
 if (!isset($_SESSION['auth']['id'])) {
@@ -17,56 +19,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $content = htmlspecialchars($_POST['content'] ?? '');
 
-  // $article_id = $_POST['article_id'] ?? null;
+ 
   $article_id = intval($_POST['article_id'] ?? null);
-  // $query = $pdo->prepare('SELECT COUNT(*) FROM articles WHERE id=:article_id ');
-  // $query->execute(['article_id' => $article_id]);
-  // $articleExists = $query->fetchColumn();
-  $model=new Article();
+  
+  $model=new \Models\Article();
   $articleExists =$model->articleSelect($article_id);
   //insertion du commentaire
 
-  // $query = $pdo->prepare("INSERT INTO `comments` (content, article_id, user_id, created_at)  VALUES (?,?,?, NOW())");
-
-  // var_dump($article_id, $user_auth, $content);
-  // $query->execute([
-  //   $content,
-  //   $article_id,
-  //   $user_auth
-  // ]);
-  $model=new Comment();
+  if (!$articleExists) {
+    $errors['article_id'] = 'L\'article n\'existe pas';
+  }
+  if (empty($content)) {
+    $errors['content'] = 'Le contenu du commentaire ne peut pas être vide';
+  }
+  if (empty($article_id) || $article_id === null) {
+    $errors['article_id'] = 'L\'ID de l\'article est invalide';
+  }
+  $model=new \Models\Comment();
     $model->insertComment(
     $content,
     $article_id,
     $user_auth
   );
-  //redirection dans la page des articles du commentaire
-  // header('location:index.php');
-  // exit();
+
   redirect("index.php");
 }
-/**
- * CE FICHIER DOIT ENREGISTRER UN NOUVEAU COMMENTAIRE EST REDIRIGER SUR L'ARTICLE !
- * 
- * On doit d'abord vérifier que toutes les informations ont été entrées dans le formulaire
- * Si ce n'est pas le cas : un message d'erreur
- * Sinon, on va sauver les informations
- * 
- * Pour sauvegarder les informations, ce serait bien qu'on soit sûr que l'article qu'on essaye de commenter existe
- * Il faudra donc faire une première requête pour s'assurer que l'article existe
- * Ensuite on pourra intégrer le commentaire
- * 
- * Et enfin on pourra rediriger l'utilisateur vers l'article en question
- */
 
-/**
- * 1. On vérifie que les données ont bien été envoyées en POST
- * D'abord, on récupère les informations à partir du POST
- * Ensuite, on vérifie qu'elles ne sont pas nulles
- */
-// 6var_dump($_SESSION['auth']['id']);
-// die();
-
-
-// var_dump($user_auth);
-// die();

@@ -1,4 +1,8 @@
 <?php
+
+namespace Models;
+
+use PDO;
 // require_once 'libraries/database.php';
 require_once 'libraries/models/Model.php';
 class Comment extends Model

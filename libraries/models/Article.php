@@ -1,25 +1,20 @@
 <?php
+namespace Models;
+use PDO;
+// require_once "libraries/database.php";
 require_once "libraries/models/Model.php";
-class Article extends Model{
+class Article extends Model
+{
 
-    protected $table="articles";
-//un comportement qui s'appelle des que on creent une function s'appellent le contructeur...
-//ici on utilise le contructeur car $pdo est appeler dans toites nos functions...
-    // public function findAllArticles()
-    // {
-    //     // $pdo = getPdo();
-    //     $sql = "SELECT * FROM articles ORDER BY created_at DESC ";
-    //     $query = $this->pdo->prepare($sql);
-    //     $query->execute();
-    //     $articles = $query->fetchAll(PDO::FETCH_ASSOC);
-    //     return $articles;
-    // }
+    protected $table = "articles";
+    //un comportement qui s'appelle des que on creent une function s'appellent le contructeur...
+    //ici on utilise le contructeur car $pdo est appeler dans toites nos functions...
     //recuperation d'un seul article
-
-        public function findArticle(int $article_id): array
+    public function findArticle(int $article_id): array
     {
+        // $pdo=getPdo();
         // $pdo = getPdo();
-        $sql = "SELECT*FROM ARTICLES WHERE id=:article_id";
+        $sql = "SELECT*FROM articles WHERE id=:article_id";
         $query = $this->pdo->prepare($sql);
         $query->execute(compact('article_id'));
         $article = $query->fetch();
@@ -52,18 +47,17 @@ class Article extends Model{
         $query->execute(compact('title', 'slug', 'introduction', 'content'));
     }
     /**
- * retourne la listes des articles classes par la date de creation
- * @return array
- */
-function getArticlesPaginated(PDO $pdo, int $limit, int $offset): array
-{
-    // $pdo = getPdo();
-    $sql = "SELECT * FROM articles ORDER BY created_at DESC LIMIT :limit OFFSET :offset";
-    $query = $pdo->prepare($sql);
-    $query->bindParam(':limit', $limit, PDO::PARAM_INT);
-    $query->bindParam(':offset', $offset, PDO::PARAM_INT);
-    $query->execute();
-    return $query->fetchAll(PDO::FETCH_ASSOC);
-}
-
+     * retourne la listes des articles classes par la date de creation
+     * @return array
+     */
+    function getArticlesPaginated( $pdo, int $limit, int $offset): array
+    {
+        // $pdo = getPdo();
+        $sql = "SELECT * FROM articles ORDER BY created_at DESC LIMIT :limit OFFSET :offset";
+        $query = $pdo->prepare($sql);
+        $query->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $query->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
