@@ -1,20 +1,20 @@
 <?php
 require_once "libraries/database.php";
-//ce ichier doit contenir les classes que tous les models vont avoit...
+//ce fichier doit contenir les classes que tous les models vont avoit...
 abstract class Model
 {
     // private $pdo;
     //utilisation de l'encapsulation: car lorsque une propriete est privee, mme si elle herite elle ne dois pas donner
     protected $pdo;
     protected $table;
-    
-    public function __contruct()
+
+    public function __contruct() // il s'agit d une fonction constructeur... des que on appelle une fonction, elle reagit directement
     {
         $this->pdo = getPdo();
     }
 
 
-     public function findAllArticles()
+    public function findAll()
     {
         // $pdo = getPdo();
         $sql = "SELECT * FROM {$this->table}";
