@@ -5,7 +5,7 @@ session_start();
 // 2Inclut le fichier de connexion à la base de données
 require_once 'libraries/database.php';
 require_once 'libraries/utils.php';
-$pdo=getPdo();
+$pdo = \Database::getPdo();
 
 // 3-Définit le titre de la page
 $pageTitle = "supprimer un article";
@@ -22,5 +22,5 @@ if(isset($_GET)){
     $query->bindParam('id', $id);
     $query->execute();
     
-    redirect('index');
+    \Http::redirect('index');
 }

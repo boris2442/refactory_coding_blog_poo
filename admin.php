@@ -122,8 +122,6 @@ $currentPage = $_GET['page'] ?? 1; //page actuelle
 $totalQuery = $pdo->query("SELECT COUNT(*) FROM articles");
 $totalItems = $totalQuery->fetchColumn(); //recupere le nombre Total  d articles 
 $offset = ($currentPage - 1) * $itemsPerPage;
-
-
 //recuperation des articles dans la datyabase...
 $articles =$model-> getArticlesPaginated($pdo, $itemsPerPage, $offset);
 $paginator = new Paginator(
@@ -135,17 +133,4 @@ $paginator = new Paginator(
 );
 
 $pageTitle = 'Page Admin';
-
-// // 2-Debut du tampon de la page de sortie
-
-// ob_start();
-
-// // 3-inclure le layout de la page d' accueil
-// require_once 'layouts/admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd_html.php';
-
-// //4-recuperation du contenu du tampon de la page d'accueil
-// $pageContent = ob_get_clean();
-
-// //5-Inclure le layout de la page de sortie
-// require_once 'layouts/layout_html.php';
 \Renderer::render('admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd', compact('pageTitle', 'articles', 'paginator'));

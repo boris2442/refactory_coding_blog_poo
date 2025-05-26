@@ -15,7 +15,7 @@ if (isset($_GET['id'])) {
     $requete->bindParam(':id', $id);
     $requete->execute();
     $article = $requete->fetch();
- 
+
 
     //renommer les donnees dans la database
 
@@ -51,4 +51,4 @@ if (isset($_GET['id'])) {
 
 $pageTitle = "Éditer un article";
 
-\Renderer::render('admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd_edit',compact('pageTitle', 'article') );
+\Renderer::render('admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd_edit', compact('pageTitle', 'article'));
