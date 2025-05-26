@@ -1,31 +1,34 @@
 <?php
+
+namespace Controllers;
+
 require_once 'libraries/utils.php';
 require_once 'libraries/database.php';
 require_once 'libraries/models/Article.php';
 require 'vendor/autoload.php'; // Assurez-vous que le chemin est correct
 use JasonGrimes\Paginator;
 
+
+
+
+
+require_once 'libraries/models/Comment.php';
+
+// require_once 'libraries/database.php';
+// require_once 'libraries/utils.php';
+// require_once 'libraries/models/Article.php';
+
+
+
+
 class Article
 {
-    // protected $pdo;
-    // public function __construct(PDO $pdo)
-    // {
-    //     $this->pdo = $pdo;
-    // }    
+
     public function index()
     {
-        // Montrer la liste des articles
-        // Assurez-vous que la fonction getPdo() est définie dans votre fichier database.php
+
         $pdo = getPdo();
-      
-       // = getPdo(); // Assurez-vous que $this->pdo est défini pour les méthodes de la classe
 
-
-
-        // $userModel=new User();
-        // $user=$userModel->findAllArticles();
-        // var_dump($user);
-        // die();
         $itemsPerPage = 5; //nbre article par page
         $currentPage = $_GET['page'] ?? 1; //page actuelle
 
@@ -52,27 +55,62 @@ class Article
 
 
 
-    public function show($id)
+    public function show()
     {
-        // Montrer un article
+
+        // require_once 'libraries/models/Comment.php';
+        // $commentModel = new \Models\Comment();
+        // require_once 'libraries/database.php';
+        $pdo = getPdo();
+        // require_once 'libraries/utils.php';
+        // require_once 'libraries/models/Article.php';
+        $errors = [];
+        $article_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$article_id || $article_id === NULL) {
+            $errors['article_id'] = 'Parametre id non valide';
+        }
+        $model = new \Models\Article();
+        $article = $model->findArticle($article_id);
+        $commentModel = new \Models\Comment();
+        $commentaires = $commentModel->findAllComments($article_id);
+
+        //recuperation des articles dans la datyabase...
+        $model = new \Models\Article();
+        $articles = $model->findAll();
+
+
+        // 1--On affiche le titre autre
+
+        $pageTitle = 'Articles du Blog';
+
+        render('articles/show', compact('pageTitle', 'commentaires', 'article', 'article_id'));
     }
-    public function delete() {}
+    public function delete()
+    {
+
+        // require_once 'libraries/database.php';
+        // require_once 'libraries/utils.php';
+        // require_once "libraries/models/Article.php";
+        $pdo = getPdo();
+
+        $pageTitle = "supprimer un article";
+
+        //supprimer un article
+        if (isset($_GET)) {
+            var_dump($_GET);
+            $id = $_GET['id'];
+            echo "<pre>";
+            var_dump($id);
+            echo "</pre>";
+
+            $model = new \Models\Article();
+            $model->deleteArticle($id);
+         redirect('admin.php');
+            // header('location:admin.php');
+        }
+    }
     public function create()
     {
         // Créer un article
     }
-    // protected $pdo;
-
-    // public function __construct(PDO $pdo)
-    // {
-    //     $this->pdo = $pdo;
-    // }
-
-    // public function findAllArticles(): array
-    // {
-    //     $sql = "SELECT * FROM articles ORDER BY created_at DESC";
-    //     $query = $this->pdo->prepare($sql);
-    //     $query->execute();
-    //     return $query->fetchAll(PDO::FETCH_ASSOC);
-    // } 
 }
