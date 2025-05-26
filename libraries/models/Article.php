@@ -1,23 +1,25 @@
 <?php
-require_once "libraries/database.php";
-class Article
-{
+require_once "libraries/models/Model.php";
+class Article extends Model{
+
+//un comportement qui s'appelle des que on creent une function s'appellent le contructeur...
+//ici on utilise le contructeur car $pdo est appeler dans toites nos functions...
     public function findAllArticles()
     {
-        $pdo = getPdo();
+        // $pdo = getPdo();
         $sql = "SELECT * FROM articles ORDER BY created_at DESC ";
-        $query = $pdo->prepare($sql);
+        $query = $this->pdo->prepare($sql);
         $query->execute();
         $articles = $query->fetchAll(PDO::FETCH_ASSOC);
         return $articles;
     }
     //recuperation d'un seul article
-    public
-    function findArticle(int $article_id): array
+
+        public function findArticle(int $article_id): array
     {
-        $pdo = getPdo();
+        // $pdo = getPdo();
         $sql = "SELECT*FROM ARTICLES WHERE id=:article_id";
-        $query = $pdo->prepare($sql);
+        $query = $this->pdo->prepare($sql);
         $query->execute(compact('article_id'));
         $article = $query->fetch();
         return $article;
@@ -25,17 +27,18 @@ class Article
     //function de suppression d'un articles
     public function deleteArticle($id)
     {
-        $pdo = getPdo();
+        // $pdo = getPdo();
         $sql = "DELETE FROM  `articles` WHERE id=:id";
-        $query = $pdo->prepare($sql);
+        // $query = $pdo->prepare($sql);
+        $query = $this->pdo->prepare($sql);
         $query->bindParam('id', $id);
         $query->execute();
     }
 
     public function articleSelect($article_id)
     {
-        $pdo = getPdo();
-        $query = $pdo->prepare('SELECT COUNT(*) FROM articles WHERE id=:article_id ');
+        // $pdo = getPdo();
+        $query = $this->pdo->prepare('SELECT COUNT(*) FROM articles WHERE id=:article_id ');
         $query->execute(['article_id' => $article_id]);
         $articleExists = $query->fetchColumn();
         return $articleExists;
@@ -43,8 +46,8 @@ class Article
 
     public function insertArticle($title, $slug, $introduction, $content)
     {
-        $pdo = getPdo();
-        $query = $pdo->prepare('INSERT INTO articles (title, slug, introduction, content, created_at) VALUES (:title, :slug, :introduction, :content, NOW())');
+        // $pdo = getPdo();
+        $query = $this->pdo->prepare('INSERT INTO articles (title, slug, introduction, content, created_at) VALUES (:title, :slug, :introduction, :content, NOW())');
         $query->execute(compact('title', 'slug', 'introduction', 'content'));
     }
     /**
@@ -53,6 +56,7 @@ class Article
  */
 function getArticlesPaginated(PDO $pdo, int $limit, int $offset): array
 {
+    // $pdo = getPdo();
     $sql = "SELECT * FROM articles ORDER BY created_at DESC LIMIT :limit OFFSET :offset";
     $query = $pdo->prepare($sql);
     $query->bindParam(':limit', $limit, PDO::PARAM_INT);
