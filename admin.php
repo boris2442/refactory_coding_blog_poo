@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once 'libraries/database.php';
-require_once 'libraries/utils.php';
+// require_once 'libraries/utils.php';
 require_once 'libraries/autoload.php';
 $pdo = \Database::getPdo();
 // require_once 'libraries/models/Article.php';

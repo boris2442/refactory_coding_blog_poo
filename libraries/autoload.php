@@ -1,6 +1,6 @@
 <?php
-spl_autoload_register(function($classname) { //enregistrer une nouvelle facon de charger les classes
+spl_autoload_register(function ($classname) { //enregistrer une nouvelle facon de charger les classes
     $classname = str_replace('\\', '/', $classname);
-    require_once ("libraries/$classname.php");
-   
+    var_dump($classname);
+    require_once("libraries/$classname.php");
 });

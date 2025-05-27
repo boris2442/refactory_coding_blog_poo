@@ -13,13 +13,13 @@ use JasonGrimes\Paginator;
 
 class Article extends Controller
 {
-//   protected $modelName = "\Models\Article";
-  protected $modelName = \Models\Article::class;
+    //   protected $modelName = "\Models\Article";
+    protected $modelName = \Models\Article::class;
     public function index()
     {
 
         // $pdo = getPdo();
-$pdo = \Database::getPdo();
+        $pdo = \Database::getPdo();
         $itemsPerPage = 5; //nbre article par page
         $currentPage = $_GET['page'] ?? 1; //page actuelle
 
@@ -58,7 +58,7 @@ $pdo = \Database::getPdo();
             $errors['article_id'] = 'Parametre id non valide';
         }
         // $model = new \Models\Article();
-        $article =$this->model->findArticle($article_id);
+        $article = $this->model->findArticle($article_id);
         $commentModel = new \Models\Comment();
         $commentaires = $commentModel->findAllComments($article_id);
 
@@ -88,9 +88,8 @@ $pdo = \Database::getPdo();
             echo "</pre>";
 
             // $model = new \Models\Article();
-           $this-> model->deleteArticle($id);
+            $this->model->deleteArticle($id);
             \Http::redirect('admin.php');
-        
         }
     }
     public function create()

@@ -3,7 +3,7 @@ class Http
 {
     public static function redirect($url): void
     {
-        header('location:$url');
+        header('Location:'.$url);
         exit();
         //location: entete de la requete http
 
