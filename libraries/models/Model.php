@@ -1,4 +1,5 @@
 <?php
+
 namespace Models;
 
 use PDO;
@@ -11,11 +12,10 @@ abstract class Model
     //utilisation de l'encapsulation: car lorsque une propriete est privee, mme si elle herite elle ne dois pas donner
     protected $pdo;
     protected $table;
-
     public function __construct() // il s'agit d une fonction constructeur... des que on appelle une fonction, elle reagit directement
     {
         // $this->pdo = getPdo();
-        $this->pdo =\Database::getPdo();
+        $this->pdo = \Database::getPdo();
     }
 
 
