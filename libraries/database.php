@@ -1,10 +1,10 @@
 <?php
 // $pdo=Database::getPdo(); //ici, il s'agit d'une methode statique, on peut l'appeler sans instancier la classe Database
 //Le singleton permet de limiter les connexions a la bases de donnees 
-$model = new \Models\Comment();
-$commentaires = $model->findALl();  // premiere connexion a mysql
-$commentaire->$model->find(); //deuxieme connexion a mysql
-$commentaire->$model->delete(); //troisieme connexion a mysql
+//$model = new \Models\Comment();
+//$commentaires = $model->findALl();  // premiere connexion a mysql
+//$commentaire->$model->find(); //deuxieme connexion a mysql
+//$commentaire->$model->delete(); //troisieme connexion a mysql
 class Database
 {
     private static  $instance = null; //pour eviter de creer plusieurs instances de la classe Database, on utilise le singleton
