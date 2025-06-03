@@ -1,4 +1,5 @@
 <?php
+ namespace Libraries;
 class Http
 {
     public static function redirect($url): void

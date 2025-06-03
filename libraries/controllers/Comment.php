@@ -1,7 +1,11 @@
 <?php
-namespace Controllers;   
+
+namespace Controllers;
+
 require_once 'libraries/models/Comment.php';
 require_once 'libraries/database.php';
+
+use Libraries\Http;
 
 require_once 'libraries/models/Article.php';
 require_once 'libraries/controllers/Controller.php';
@@ -15,12 +19,12 @@ class Comment extends Controller
         $this->model = new \Models\Comment();
 
 
-                
+
         // namespace Comments; 
 
         require_once 'libraries/models/Comment.php';
         // $pdo = getPdo();
-$pdo = \Database::getPdo();
+        $pdo = \Database::getPdo();
         if (!isset($_SESSION['auth']['id'])) {
             header('location: login.php');
             exit();
@@ -55,7 +59,7 @@ $pdo = \Database::getPdo();
                 $user_auth
             );
 
-            \Http::redirect("index.php");
+            \Libraries\Http::redirect("index.php");
         }
     }
     public  function insert()

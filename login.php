@@ -54,4 +54,4 @@ if (isset($_POST['login'])) {
 // 1-On affiche le titre
 
 $pageTitle = "Se connecter dans le Blog";
-\Renderer::render('articles/login', compact('pageTitle'));
+\Libraries\Renderer::render('articles/login', compact('pageTitle'));

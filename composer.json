@@ -1,5 +1,19 @@
 {
-    "require": {
-        "jasongrimes/paginator": "~1.0"
+  "name": "aubin/refactory_poo",
+  "description": "poo php autoloading class name",
+  "autoload": {
+    "psr-4": {
+      "Aubin\\RefactoryPoo\\": "src/",
+      "Models\\": "libraries/models/",
+      "Controllers\\": "libraries/controllers/",
+     "Libraries\\": "libraries/"
     }
+  },
+  "authors": [
+    {
+      "name": "boris2442",
+      "email": "aubinborissimotsebo@gmail.com"
+    }
+  ],
+  "require": {}
 }

@@ -6,4 +6,4 @@ $pdo = \Database::getPdo();
 // 1--On affiche le titre autre
 
 $pageTitle ='page users'; 
-\Renderer::render('users_dddddddddddddddd/usersddddddddddddddddd', compact('pageTitle'));
+\Libraries\Renderer::render('users_dddddddddddddddd/usersddddddddddddddddd', compact('pageTitle'));

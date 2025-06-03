@@ -21,6 +21,6 @@ if(isset($_GET)){
     $query=$pdo->prepare($sql);
     $query->bindParam('id', $id);
     $query->execute();
-    
-    \Http::redirect('index');
+   
+   \Libraries\Http::redirect('index');
 }

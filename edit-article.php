@@ -40,7 +40,7 @@ if (isset($_GET['id'])) {
             $requete->bindValue(':content', $_POST['content']);
             $requete->bindValue(':id', $id);
             $requete->execute();
-            \Http::redirect('admin.php');
+         \Libraries\Http::redirect('admin.php');
         } else {
             echo "<pre>";
             var_dump($errors);
@@ -51,4 +51,4 @@ if (isset($_GET['id'])) {
 
 $pageTitle = "Éditer un article";
 
-\Renderer::render('admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd_edit', compact('pageTitle', 'article'));
+\Libraries\Renderer::render('admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd_edit', compact('pageTitle', 'article'));

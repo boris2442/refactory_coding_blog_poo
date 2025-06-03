@@ -3,7 +3,8 @@ session_start();
 require_once 'libraries/database.php';
 // require_once 'libraries/utils.php';
 // require_once 'libraries/model/Article.php';
-require_once 'libraries/autoload.php';
+// require_once 'libraries/autoload.php';
+require_once 'vendor/autoload.php'; // Autoload de Composer
 $pdo = \Database::getPdo();
 $errors = [];
 $article_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
@@ -19,4 +20,4 @@ $article = $model->findArticle($article_id);
 $model = new \Models\Article();
 $articles =$model->findAll();
 $pageTitle = 'Articles du Blog';
-\Renderer::render('admin_dashboarddddddddddddddddd/admin_show', compact('pageTitle', 'articles', 'article'));
+\Libraries\Renderer::render('admin_dashboarddddddddddddddddd/admin_show', compact('pageTitle', 'articles', 'article'));

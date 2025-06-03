@@ -1,12 +1,13 @@
 <?php
 session_start();
 require_once 'libraries/database.php';
+require 'vendor/autoload.php';
 // require_once 'libraries/utils.php';
-require_once 'libraries/autoload.php';
+// require_once 'libraries/autoload.php';
 $pdo = \Database::getPdo();
 // require_once 'libraries/models/Article.php';
 if ($_SESSION['role'] != 'admin') {
-    \Http::redirect('index.php');
+   \Libraries\Http::redirect('index.php');
 }
 //-Nettoyage des entrées
 $model = new \Models\Article(); 
@@ -112,7 +113,6 @@ if (isset($_POST['add-article'])) {
     $model = new \Models\Article();
     $model->insertArticle($title, $slug, $introduction, $content);
 }
-require 'vendor/autoload.php';
 
 use JasonGrimes\Paginator;
 
@@ -133,4 +133,4 @@ $paginator = new Paginator(
 );
 
 $pageTitle = 'Page Admin';
-\Renderer::render('admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd', compact('pageTitle', 'articles', 'paginator'));
+\Libraries\Renderer::render('admin_dashboarddddddddddddddddd/admin_dashboarddddddddddddddddd', compact('pageTitle', 'articles', 'paginator'));

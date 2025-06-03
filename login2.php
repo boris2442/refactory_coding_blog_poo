@@ -1,8 +1,9 @@
 <?php
 session_start();
-require_once 'libraries/database.php';
-$pdo=getPdo();
-
+require_once 'vendor/autoload.php'; // Autoload de Composer
+// require_once 'libraries/database.php';
+// $pdo=getPdo();
+$pdo = \Database::getPdo();
 if (isset($_POST['login'])) {
     $errors = ""; 
     if (!empty($_POST['email']) && !empty($_POST['password'])) {
@@ -65,4 +66,4 @@ $pageTitle ="Se connecter dans le Blog";
 
 // //5-Inclure le layout de la page de sortie
 // require_once 'layouts/layout_html.php';
-render('articles/login', compact('pageTitle'));
+\Libraries\Renderer::render('articles/login', compact('pageTitle'));

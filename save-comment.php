@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-// require_once 'libraries/controllers/Comment.php';
-require_once 'libraries/autoload.php';
+require_once 'vendor/autoload.php';
 $controller = new \Controllers\Comment();
 $controller->insert();

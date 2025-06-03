@@ -1,6 +1,8 @@
 <?php
 
 namespace Controllers;
+use Libraries;
+use \Libraries\Renderer;
 
 require_once 'libraries/Database.php';
 // require_once 'libraries/utils.php';
@@ -41,17 +43,14 @@ class Article extends Controller
         );
         $pageTitle = 'Accueil du Blog';
         // render('articles/index', compact('pageTitle', 'articles', 'paginator'));
-        \Renderer::render('articles/index', compact('pageTitle', 'articles', 'paginator'));
+        Renderer::render('articles/index', compact('pageTitle', 'articles', 'paginator'));
     }
 
 
     public function show()
     {
 
-        // $pdo = getPdo();
         $pdo = \Database::getPdo();
-        // require_once 'libraries/utils.php';
-        // require_once 'libraries/models/Article.php';
         $errors = [];
         $article_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
         if (!$article_id || $article_id === NULL) {
@@ -71,7 +70,7 @@ class Article extends Controller
 
         $pageTitle = 'Articles du Blog';
 
-        \Renderer::render('articles/show', compact('pageTitle', 'commentaires', 'article', 'article_id'));
+        Renderer::render('articles/show', compact('pageTitle', 'commentaires', 'article', 'article_id'));
     }
     public function delete()
     {
@@ -89,7 +88,7 @@ class Article extends Controller
 
             // $model = new \Models\Article();
             $this->model->deleteArticle($id);
-            \Http::redirect('admin.php');
+            \Libraries\Http::redirect('admin.php');
         }
     }
     public function create()

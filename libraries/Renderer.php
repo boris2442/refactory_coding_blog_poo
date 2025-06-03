@@ -1,4 +1,5 @@
 <?php
+namespace Libraries;
 class Renderer
 {
    public static function render(string $path, array $variables = [])
